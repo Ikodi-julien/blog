@@ -9,6 +9,7 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=blog
       - MARIADB_DATABASE=blog
+
   larablog:
     image: docker.io/bitnami/laravel:8
     container_name: larablog
@@ -20,6 +21,16 @@ services:
       - DB_USERNAME=blog
       - DB_DATABASE=blog
     volumes:
-      - "./app:/app"
+      - "./larablog:/app"
+    depends_on:
+      - mariadb
+
+  nextblog:
+    build: ./nextblog/
+    image: ikodi/nextblog
+    ports:
+      - "6600:3000"
+    environment:
+      - PORT=3000
     depends_on:
       - mariadb
