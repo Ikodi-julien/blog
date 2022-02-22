@@ -2,30 +2,14 @@
 
 ## Besoins et objectifs :
 
-- Passer mon blog wordpress sur un application que j'aurai créée de A à Z.
+- Passer mon blog wordpress sur une application que j'aurai créée de A à Z.
 - Réaliser une application avec Laravel afin d'utiliser le framework.
 - Réaliser une autre application avec Next.js et les styled components (en deuxième partie de projet, pour le plaisir !).
 - Le challenge de réaliser un projet multi plate-forme, incluant Mariadb/PHP/Laravel/Node.js/Next.js/React dans un même environnement Docker.
 
 ## Etapes (détails dans le journal)
 
-- 1er temps, les besoins :
-
-  - Définir les user cases, features,
-
-- 2ème temps, le setup technique :
-
-  - setup de l'app avec Docker + Laravel + Mariadb + Next.js
-  - Tester la connexion db depuis laravel et Next.js,
-
-- 3ème temps, la conception :
-  - Faire les wireframes pour le blog Laravel,
-  - Faire nouveau wireframes pour Next.js,
-- 4ème temps, la réalisation :
-  - Coder le blog avec Laravel + Mariadb,
-  - Coder l'app avec Next.js + même Mariadb.
-
-### Les besoins
+### 1er temps, les besoins :
 
 En tant que visiteur, je veux :
 
@@ -38,7 +22,100 @@ En tant qu'auteur, en plus du visiteur, je veux :
 - Avoir accès a une interface privée afin d'uploader un article,
 - Pouvoir uploader un dossier contenant l'article au format markdown et les médias associés,
 
-### Stack technique
+### 2ème temps, le setup technique :
+
+- setup de l'app avec Docker + Laravel + Mariadb + Next.js
+- Tester la connexion db depuis laravel et Next.js,
+
+### 3ème temps, la conception :
+
+[Lien vers les wireframes avec 'whimsical'](https://whimsical.com/2n7setK1dZRzdh2BXQdcrR)
+
+**Partials**
+
+Navbar (toujours visible):
+
+- Logo ikodi -> ikodi.eu
+- Accueil
+- Articles
+- Contact
+- Portfolio
+
+Barre de recherche par catégorie
+
+- Liste dropdown large
+- Résultats affichés sur page /articles
+
+Footer
+
+- Liens Linkedin et Github,
+- Lien feedback.ikodi.eu
+- Logo Ikodi + date mise à jour
+- Lien mail
+
+**Page accueil / Landing :**
+
+Navbar
+
+Héro
+
+- Titre + animation css + liens articles et contacts
+
+Derniers articles
+
+- Liste en mode réduit (3 ou 4),
+
+Barre de recherche par catégorie
+
+Footer
+
+**Page Articles**
+
+Navbar
+
+Barre de recherche par catégorie
+
+Liste des articles (cartes)
+
+- Titre
+- Date + Catégories + Durée lecture
+- Contenu short
+- Lien vers l'article
+
+Pagination
+
+Footer
+
+**Page article**
+
+Navbar
+
+Article
+
+- Titre
+- Date + Catégories + Durée lecture
+- Contenu
+
+3 articles random
+
+Formulaire de commentaire
+
+- Textarea
+- Nom
+- Email (required)
+
+Commentaires
+
+Footer
+
+_Faire wireframes pour Next.js, mêmes composants._
+
+### 4ème temps, la réalisation :
+
+- Coder le blog avec Laravel + Mariadb,
+- Coder l'app avec Next.js + même Mariadb.
+
+## Stack technique
 
 - Déploiement :
   - dev : local/Docker,

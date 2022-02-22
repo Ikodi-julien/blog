@@ -28,6 +28,7 @@ services:
   nextblog:
     build: ./nextblog/
     image: ikodi/nextblog
+    container_name: nextblog
     ports:
       - "6600:3000"
     environment:
