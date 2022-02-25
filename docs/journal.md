@@ -1,3 +1,16 @@
+## Le 25/02/2022
+
+Objectifs du jour :
+
+- Faire le MCD.
+  - Lister et décrire les modèles -> ok
+  - Faire le shéma MCD -> ok
+
+Mettre en lien le MCD et commit.
+
+- app Laravel :
+  - Mise en place page d'accueil.
+
 ## Le 22/02/2022
 
 Objectifs du jour :
@@ -14,16 +27,7 @@ Objectifs du jour :
     - mobil -> ok
     - desktop -> ok
 
-Mettre en lien les wireframes et commit.
-
-- Faire le MCD mariadb.
-  - Lister et décrire les modèles
-  - Faire le shéma MCD
-
-Mettre en lien le MCD et commit.
-
-- app Laravel :
-  - Mise en place page d'accueil.
+Mettre en lien les wireframes et commit -> ok
 
 ## Le 21/02/2022
 

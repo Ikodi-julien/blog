@@ -1,0 +1,5 @@
+CATEGORIE: id, nom
+CATEGORIE_HAS_POST, 0N CATEGORIE, 1N POST
+POST: id, auteur, titre, contenu, date, durée
+HAS, 11 MESSAGE, 0N POST
+MESSAGE: id, auteur, contenu

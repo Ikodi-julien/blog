@@ -108,7 +108,17 @@ Commentaires
 
 Footer
 
-_Faire wireframes pour Next.js, mêmes composants._
+_Pour Next.js, mêmes composants._
+
+#### Le MCD
+
+CATEGORIE: id, nom  
+CATEGORIE_HAS_POST, 0N CATEGORIE, 1N POST  
+POST: id, auteur, titre, contenu, date, durée  
+HAS, 11 MESSAGE, 0N POST  
+MESSAGE: id, auteur, contenu
+
+![schéma mcd](./docs/Posts.svg)
 
 ### 4ème temps, la réalisation :
 
