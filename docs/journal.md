@@ -1,3 +1,17 @@
+## Le 26/02/2022
+
+Objectifs du jour :
+
+- app Laravel :
+  - Mise en place composants page d'accueil. -> ok
+  - Ajouter bootstrap -> ok
+  - css de base avec bootstrap :
+    - navbar -> ok
+    - footer ->
+    - main :
+      - héro ->
+      - section articles récents ->
+
 ## Le 25/02/2022
 
 Objectifs du jour :
@@ -6,10 +20,7 @@ Objectifs du jour :
   - Lister et décrire les modèles -> ok
   - Faire le shéma MCD -> ok
 
-Mettre en lien le MCD et commit.
-
-- app Laravel :
-  - Mise en place page d'accueil.
+Mettre en lien le MCD et commit -> ok
 
 ## Le 22/02/2022
 
