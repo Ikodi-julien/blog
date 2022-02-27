@@ -4,9 +4,12 @@ Objectifs du jour :
 
 - Page affichage des articles :
   - Création des composants selon wireframe + css de base -> ok
+    commit -> ok
+- Création des modeles selon mcd et migrations :
+  - Post -> ok
+  - Message -> ok
+  - Category -> ok
     commit ->
-- Création des modeles selon mcd et migration ->
-  commit ->
 - Stockage de 3 articles demo ->
   commit ->
 - Affichage des articles demo ->
