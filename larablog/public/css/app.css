@@ -11294,6 +11294,16 @@ section {
   padding: 2rem;
 }
 
+.post__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 2rem;
+  width: auto;
+  max-width: 800px;
+  margin: auto;
+}
+
 /** Bootstrap css */
 .list-group {
   width: auto;

@@ -1,16 +1,31 @@
+## Le 27/02/2022
+
+Objectifs du jour :
+
+- Page affichage des articles :
+  - Création des composants selon wireframe + css de base -> ok
+    commit ->
+- Création des modeles selon mcd et migration ->
+  commit ->
+- Stockage de 3 articles demo ->
+  commit ->
+- Affichage des articles demo ->
+  commit ->
+
 ## Le 26/02/2022
 
 Objectifs du jour :
 
 - app Laravel :
-  - Mise en place composants page d'accueil. -> ok
-  - Ajouter bootstrap -> ok
+  - Mise en place composants sur page d'accueil. -> ok
+  - Ajouter bootstrap css -> ok
   - css de base avec bootstrap :
     - navbar -> ok
-    - footer ->
+    - footer -> ok
     - main :
-      - héro ->
-      - section articles récents ->
+      - héro -> ok
+      - section articles récents -> ok
+        Commit -> ok
 
 ## Le 25/02/2022
 
