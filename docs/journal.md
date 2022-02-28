@@ -8,9 +8,13 @@ Objectifs du jour :
   - Enregistrement des meta données en db:
     - Création d'un formulaire de saisie -> ok
     - Création de la route et du controller -> ok
-    - Enregistrement en db ->
-    - Persitance données avec migration ->
+    - Enregistrement en db -> ok
+      commit -> ok
+    - Afficher la liste de posts -> ok
+    - Modifier la migration et le controller pour meilleur insertion en db -> ok
       commit ->
+  - Persitance en db avec migration pour les trois articles ->
+    commit ->
 
 ## Le 27/02/2022
 
