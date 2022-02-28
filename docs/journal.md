@@ -4,7 +4,7 @@ Objectifs du jour :
 
 - Mise en forme html et stockage de 3 articles demo -> ok
   commit -> ok
-- Affichage des articles demo:
+- Affichage des articles demo dans la vue 'list':
   - Enregistrement des meta données en db:
     - Création d'un formulaire de saisie -> ok
     - Création de la route et du controller -> ok
@@ -12,9 +12,13 @@ Objectifs du jour :
       commit -> ok
     - Afficher la liste de posts -> ok
     - Modifier la migration et le controller pour meilleur insertion en db -> ok
-      commit ->
-  - Persitance en db avec migration pour les trois articles ->
+      commit -> ok
+- Affichage d'un post :
+  - Ajout d'un volume avec docker-compose pour récupérer les posts -> ok
+  - Affichage d'un post d'après le titre dans l'url -> ok
     commit ->
+- Prévoir le seeding pour les articles ->
+  commit ->
 
 ## Le 27/02/2022
 

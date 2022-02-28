@@ -39,7 +39,11 @@ class PostController extends Controller
     public function list() {
         // dd(request('category'));
         $posts = Post::all();
-
         return view('post.list', ['posts' => $posts]);
+    }
+
+    public function show() {
+
+        return view('post.post', ['filePath' => request('filePath')]);
     }
 }
