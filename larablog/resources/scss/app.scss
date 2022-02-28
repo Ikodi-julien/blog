@@ -1,14 +1,23 @@
 @import "bootstrap";
 
-.logoIkodi {
-  width: 40px;
-  height: 40px;
-  background: center/contain no-repeat url("../assets/logo_ikodi_carre.png");
+main {
+  padding: 1rem;
 }
 section {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 2rem;
+}
+.logoIkodi {
+  width: 40px;
+  height: 40px;
+  background: center/contain no-repeat url("../assets/logo_ikodi_carre.png");
+}
+.createform__container {
+  width: auto;
+  margin: auto;
+  max-width: 850px;
   padding: 2rem;
 }
 .post__list {
@@ -19,6 +28,9 @@ section {
   width: auto;
   max-width: 800px;
   margin: auto;
+}
+.flash-error {
+  color: $red-500;
 }
 /** Bootstrap css */
 .list-group {

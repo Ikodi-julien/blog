@@ -3,9 +3,14 @@
 Objectifs du jour :
 
 - Mise en forme html et stockage de 3 articles demo -> ok
-  commit ->
-- Affichage des articles demo ->
-  commit ->
+  commit -> ok
+- Affichage des articles demo:
+  - Enregistrement des meta données en db:
+    - Création d'un formulaire de saisie -> ok
+    - Création de la route et du controller -> ok
+    - Enregistrement en db ->
+    - Persitance données avec migration ->
+      commit ->
 
 ## Le 27/02/2022
 

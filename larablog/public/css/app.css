@@ -11281,16 +11281,27 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-.logoIkodi {
-  width: 40px;
-  height: 40px;
-  background: center/contain no-repeat url(/images/logo_ikodi_carre.png?00a8780f70fd87abdecb1e627fce9b9d);
+main {
+  padding: 1rem;
 }
 
 section {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 2rem;
+}
+
+.logoIkodi {
+  width: 40px;
+  height: 40px;
+  background: center/contain no-repeat url(/images/logo_ikodi_carre.png?00a8780f70fd87abdecb1e627fce9b9d);
+}
+
+.createform__container {
+  width: auto;
+  margin: auto;
+  max-width: 850px;
   padding: 2rem;
 }
 
@@ -11302,6 +11313,10 @@ section {
   width: auto;
   max-width: 800px;
   margin: auto;
+}
+
+.flash-error {
+  color: #dc3545;
 }
 
 /** Bootstrap css */

@@ -10,9 +10,9 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    @include('partials.header.navbar-item', ['link' => '/', 'text' => 'Accueil'])
-                    @include('partials.header.navbar-item', ['link' => 'all-categories', 'text' => 'Articles'])
-
+				@include('partials.header.navbar-item', ['link' => '/', 'text' => 'Accueil'])
+				@include('partials.header.navbar-item', ['link' => 'all-categories', 'text' => 'Articles'])
+				@include('partials.header.navbar-item', ['link' => 'admin/new_post', 'text' => 'Upload'])
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 						Plus
@@ -25,11 +25,9 @@
 						<li><a class="dropdown-item" href="mailto:julien.pellin@ikodi.eu">Contact</a></li>
 					</ul>
 				</li>
-
-				<li class="nav-item">
-                    {{-- Activé avec un compte admin ? --}}
+				{{-- <li class="nav-item">
 					<a class="nav-link disabled">Admin</a>
-				</li>
+				</li> --}}
 			</ul>
 			<form class="d-flex">
 				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
