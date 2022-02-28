@@ -16,8 +16,8 @@ Objectifs du jour :
 - Affichage d'un post :
   - Ajout d'un volume avec docker-compose pour récupérer les posts -> ok
   - Affichage d'un post d'après le titre dans l'url -> ok
-    commit ->
-- Prévoir le seeding pour les articles ->
+    commit -> ok
+- Voir comment persister les données db avec docker -> ok (ajout d'un volume en lien avec host pour les datas)
   commit ->
 
 ## Le 27/02/2022

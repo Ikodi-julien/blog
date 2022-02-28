@@ -9,6 +9,8 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=blog
       - MARIADB_DATABASE=blog
+    volumes:
+      - "./mariadb_persistence:/bitnami/mariadb"
 
   larablog:
     image: docker.io/bitnami/laravel:8
