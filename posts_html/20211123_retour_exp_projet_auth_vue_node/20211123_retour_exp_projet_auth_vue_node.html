@@ -1,0 +1,279 @@
+<h1>Retour d'expérience | Projet authentification avec Vue.js + Node.js</h1>
+
+<ul>
+  <li>Post author:julien</li>
+  <li>Post published:23 novembre 2021</li>
+  <li>Post category:API / Formation / Node / Projet / serveur</li>
+  <li>Post comments:0 commentaire</li>
+</ul>
+<p>
+  <em
+    >Un court billet pour garder une trace des différentes étapes de ce
+    projet.</em
+  >
+</p>
+
+<h2>Le Projet</h2>
+<p>
+  J'ai réalisé plusieurs applications qui demandent une authentification, toutes
+  sous le domaine 'ikodi.eu'.
+</p>
+
+<p>
+  Ici le projet est de développer une application d'authentification et
+  d'authorisation qui puisse être (à terme) utilisée avec mes autres
+  applications.
+</p>
+
+<p>
+  Ainsi un utilisateur pourra créer un compte ou se logguer depuis une des
+  applications du domaine 'ikodi.eu' et resté identifié sur les autres
+  applications.
+</p>
+
+<h2>Ressources et lien</h2>
+<p>
+  Le repo du projet :
+  <a href="https://github.com/Ikodi-julien/auth-ikodi"
+    >https://github.com/Ikodi-julien/auth-ikodi</a
+  >
+</p>
+
+<p>
+  Une vidéo pour le flow de validation d'email :
+  <a href="https://www.youtube.com/watch?v=72JYhSoVYPc"
+    >https://www.youtube.com/watch?v=72JYhSoVYPc</a
+  >
+</p>
+
+<h2>1/ Phase de réflexion et préparation :</h2>
+<p><em>durée : 2 jours</em></p>
+
+Création du repo github, Réflexion sur l'architecture globale et choix des
+technos, Réalisation du MCD et des wireframes,
+
+<h3>Stack technique :</h3>
+
+<h4>Frontend :</h4>
+<ul>
+  <li>Vue.js,</li>
+  <li>Axios,</li>
+  <li>Tests avec mocha + chaï,</li>
+</ul>
+
+<h4>Backend:</h4>
+<ul>
+  <li>API REST avec express, axios, cors,</li>
+  <li>Base de donnée persistante PostgreSQL + callback,</li>
+  <li>Redis pour le status de l'utilisateur,</li>
+  <li>Authentification :</li>
+  <ul>
+    <li>Formulaire email + password avec cryptage ou</li>
+    <li>API tiers (google, github, linkedin)</li>
+  </ul>
+  <li>Authorisation par token JWT en cookie http-only,</li>
+  <li>Envoi de mails avec Nodemailer,</li>
+</ul>
+
+<h4>Déploiement :</h4>
+<ul>
+  <li>Instance EC2 d'AWS,</li>
+  <li>Connexion ssh,</li>
+  <li>Proxy nginx,</li>
+</ul>
+<h2>2/ Mise en place du frontend à blanc :</h2>
+<p><em>durée : 4 jours</em></p>
+
+Apprentissage des bases de Vue, Setup d'un projet Vue.js, Réalisation des
+composants avec leurs tests, d'après les wireframes.
+<h3>3/ Mise en place Backend :</h3>
+<p><em>durée : 5 jours</em></p>
+
+<ul>
+  <li>setup app express,</li>
+  <li>setup pgSQL,</li>
+  <li>setup Redis,</li>
+  <li>setup endpoints :</li>
+  <ul>
+    <li>GET :</li>
+    <ul>
+      <li>/</li>
+      <li>/doc (à ce jour pas encore fait, enregistré en issue #</li>
+      <li>/count</li>
+      <li>/google</li>
+      <li>/google/auth</li>
+      <li>/github</li>
+      <li>/github/auth</li>
+      <li>/me</li>
+      <li>/email-verify</li>
+      <li>/reset-pwd/:id/:token</li>
+    </ul>
+    <li>POST:</li>
+    <ul>
+      <li>/login</li>
+      <li>/signup</li>
+      <li>/logout</li>
+      <li>/forgot-pwd</li>
+      <li>/reset-pwd/:id/:token</li>
+    </ul>
+    <li>PUT:</li>
+    <ul>
+      <li>/me/credentials</li>
+      <li>/me/password</li>
+    </ul>
+    <li>DELETE:</li>
+    <ul>
+      <li>/me</li>
+    </ul>
+  </ul>
+</ul>
+
+<p>setup controllers et middlewares :</p>
+<ul>
+  <li>signup, login, update, delete, google api, github api, redirect,</li>
+  <li>envoi de lien de confirmation d'email et de reset du mot de passe,</li>
+  <li>gestion du statut de l'utilisateur avec Redis,</li>
+  <li>vérification et renouvellement des tokens JWT,</li>
+</ul>
+
+<h2>4/ Test des composants Vue.js :</h2>
+<p><em>durée : 4 jours</em></p>
+
+<ul>
+  <li>Apprentissage du test des composants Vue.js,</li>
+  <li>Réalisation des tests : Mocha, chaï</li>
+</ul>
+<p>
+  Bien plus long que prévu, je n'avais pas configuré les tests à la création du
+  projet et il y a eu des incompatibilités de version. De plus, la doc de Vue3
+  est bien plus claire que celle de Vue2 pour ce qui est de la réalisation des
+  tests.
+</p>
+
+<p>Au final c'est pratique quand c'est bien configuré depuis le début.</p>
+
+<h2>5/ Tests d'intégration du back :</h2>
+<p><em>durée : 2 jours,</em></p>
+
+<p>
+  Réalisation des tests d'intégration (login, signup, update, delete) et modifs
+  pour qu'ils passent…
+</p>
+
+<h2>6/ Connexion Frontend et Backend :</h2>
+<p><em>durée : 4 jours</em></p>
+
+<p>
+  Ici, j'ai compris la complexité que pouvait représenter une application
+  d'authentification autonome. Notamment quand il faut avoir jusqu'à 8 terminaux
+  ouverts pour suivre une requête :
+</p>
+
+<ul>
+  <li>console du front de l'app lambda d'origine -></li>
+  <li>console front de l'app d'authentification -></li>
+  <li>logs backend de l'app d'authentication -></li>
+  <li>cli backend de l'app d'authentification -></li>
+  <li>cli base de donnée de l'app d'authentification -></li>
+  <li>retour console front de l'app lambda -></li>
+  <li>logs backend de l'app lambda -></li>
+  <li>cli backend de l'app lambda -></li>
+  <li>cli base de données de l'app lambda</li>
+</ul>
+<p>
+  Et oui, le compte d'un utilisateur est partagé entre l'app d'authentification
+  (pseudo, email, mdp crypté) et l'app lambda (avatar, catégories d'animés,
+  favoris…) les deux sont reliés grâce aux jsonwebtoken.
+</p>
+
+<p>
+  Egalement, il est bon de prévoir sérieusement le MCD au départ. Coder direct
+  la tête dans le guidon ça n'est pas efficace.
+</p>
+
+<h2>7/ Gestion login et signup avec api (google et github)</h2>
+<p><em>durée : 2 jours</em></p>
+
+<p>C'est l'occasion de factoriser, chainer les middlewares dans express.</p>
+
+<p>
+  Petite satisfaction (même si perte de temps avec api github), car c'est allé
+  plutôt rapidement et simplement comparé à mes essais précédents.
+</p>
+
+<p>
+  Le savais-tu ? Une requête Ajax ne permet pas la redirection (après réflexion
+  c'est logique) donc pour tester des valeurs de formulaire avant d'envoyer un
+  formulaire (dont la requête pourra être redirigée) il faut recréer un
+  formulaire et un event submit après les contrôles des valeurs d'input…
+</p>
+
+<h2>8/ Fix bugs et tests :</h2>
+<p><em>durée 2 jours</em></p>
+
+<ul>
+  <li>Tests globaux d'intégration en local et ajustements,</li>
+  <li>Création des branches de déploiement.</li>
+</ul>
+<h2>
+  9/ Mise en place de l'envoi de mail pour mot de passe oublié et confirmation
+  d'email :
+</h2>
+<p><em>durée : 1 jour</em></p>
+
+<p>Rien à dire, si ce n'est que cela fera l'objet du prochain billet.</p>
+
+<h2>10/ Préparation avant build et déploiement :</h2>
+<p><em>durée : 1 jour</em></p>
+<ul>
+  <li>S'assurer que les variables d'url sont bien configurées et utilisées,</li>
+  <li>Supprimer les valeurs par défaut des inputs de formulaires,</li>
+  <li>Régler et tester les inputs de mot de passe avec min et max et regex,</li>
+  <li>Chasse aux console.log,</li>
+  <li>Faire un joli code bien rangé,</li>
+</ul>
+
+<h2>11/ Déploiement :</h2>
+<p><em>durée : 2 jours</em></p>
+
+<ul>
+  <li>Création de l'enregistrement DNS,</li>
+  <li>
+    Clone repos de l'app d'authentification et du front sur instance EC2 aws,
+    également l'app « Concord » visible à concord.ikodi.eu modifiée pour
+    utilisée l'app d'authentification.
+  </li>
+  <li>Augmentation du stockage sur l'instance EC2,</li>
+  <li>Gestion des conflits de version (downgrade nécessaire sur EC2),</li>
+  <li>Setup base de données pgSQL,</li>
+  <li>Daemonisation de l'app avec pm2,</li>
+  <li>
+    Création des fichiers de variables d'environnement et de clé
+    d'identification (google, github),
+  </li>
+  <li>
+    Paramétrage du proxy Nginx y compris certification https avec Certbot,
+  </li>
+  <li>Tests des scénari d'intégration,</li>
+  <li>Versionning V1 pour auth, V2 pour Concord.</li>
+</ul>
+
+<h2>12/ Tests de scénari dans le navigateur :</h2>
+<p><em>durée : Encore en cours à ce jour</em></p>
+
+<p>Enregistrement et résolution d'issues dans le projet github.</p>
+
+<h2>En résumé :</h2>
+<p>Préparation : 2 jours,</p>
+
+<p>Frontend : 4 jours</p>
+
+<p>Backend : 7 jours</p>
+
+<p>Connexion back/ front : 4 jours</p>
+
+<p>Fix, tests, factorisation et stabilisation : 9 jours</p>
+
+<p>Déploiement : 2 jours</p>
+
+<p>Total : 4 semaines</p>

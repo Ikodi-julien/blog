@@ -1,3 +1,12 @@
+## Le 28/02/2022
+
+Objectifs du jour :
+
+- Mise en forme html et stockage de 3 articles demo -> ok
+  commit ->
+- Affichage des articles demo ->
+  commit ->
+
 ## Le 27/02/2022
 
 Objectifs du jour :
@@ -9,11 +18,7 @@ Objectifs du jour :
   - Post -> ok
   - Message -> ok
   - Category -> ok
-    commit ->
-- Stockage de 3 articles demo ->
-  commit ->
-- Affichage des articles demo ->
-  commit ->
+    commit -> ok
 
 ## Le 26/02/2022
 

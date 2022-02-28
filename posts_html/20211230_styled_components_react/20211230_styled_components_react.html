@@ -1,0 +1,201 @@
+<article>
+  <h1>React styled-components et Next.js</h1>
+  <ul>
+    <li>Post author:julien</li>
+    <li>Post published:30 décembre 2021</li>
+    <li>Post category:css / JavaScript / React</li>
+  </ul>
+
+  <p>
+    <em>
+      Styled-components, comme son nom l’indique, fournit directement des
+      composants react avec des styles associés. Dans un fichier javascript, le
+      css est lié à un composant créé grâce à la fonction fournie par
+      styled-components et aux littéraux de gabarit (les backticks « ). C’est ce
+      composant qui est ensuite exporté pour être affiché
+    </em>
+  </p>
+
+  <h2>Différences et avantages</h2>
+  <p>
+    De mon point de vue, le principal avantage, de taille, est que les classes
+    css ne sont plus nécessaires. Oui, il n’y a plus de classes css.
+  </p>
+
+  <p>
+    Et c’est assez simple et intuitif à comprendre, comme on utilise
+    l’équivalent d’un composant stylisé directement. Ainsi, les propriétés css
+    varient en fonction des propriétés passées au composant .
+  </p>
+
+  <p>
+    A l’utilisation, les styled-components sont extrémement pratiques et rapides
+    à prendre en main, je ne m’en suis pas rendu compte tout de suite mais on
+    gagne un temps incroyable à ne pas chercher parmis les différentes classes.
+  </p>
+
+  <p>
+    Si on veut modifier le style d’un élément affiché, un coup d’oeil dans la
+    console pour afficher le code html, le nom du composant est préfixé dans la
+    classe de l’élément inspecté, on va voir le code du composant correspondant,
+    fin.
+  </p>
+
+  <p>
+    Pour les inconvénients, j’en vois surtout un, l’auto-complétion avec Emmet
+    n’est pas prise en charge.
+  </p>
+
+  <h2>Exemple d’utilisation « dumb component »</h2>
+
+  <h5>La création du composant :</h5>
+  <figure><img src="1.png" alt="code lines" /></figure>
+  <h5>L’utilisation pour le render :</h5>
+  <figure><img src="2.png" alt="code lines" /></figure>
+  <figure><img src="2-1.png" alt="code lines" /></figure>
+  <figure><img src="2-2.png" alt="code lines" /></figure>
+  <figure><img src="2-3.png" alt="code lines" /></figure>
+
+  <h2>Exemple gérer un « smart-component »</h2>
+  <p>
+    Il est tout à fait possible de créer un composant complexe et/ou avec une
+    logique et ensuite de lui donner un style, dans ce cas c’est le composant
+    stylisé qui est utilisé pour le render.
+  </p>
+
+  <h5>Le composant « de base » :</h5>
+  <figure><img src="3.png" alt="code lines" /></figure>
+
+  <h5>Les composants stylisés :</h5>
+  <figure><img src="4.png" alt="code lines" /></figure>
+  <figure><img src="5.png" alt="code lines" /></figure>
+
+  <h5>L’utilisation pour le render</h5>
+  <figure><img src="6.png" alt="code lines" /></figure>
+  <figure><img src="6-1.png" alt="code lines" /></figure>
+
+  <h2>Gérer des thèmes quand les pages sont pré-rendues avec Next.js</h2>
+  <p>
+    Lien :
+    <a href="https://styled-components.com/docs/advanced#server-side-rendering"
+      >https://styled-components.com/docs/advanced#server-side-rendering</a
+    >
+  </p>
+
+  <p>
+    La problèmatique rencontrée ici est qu’un thème s’applique à l’ensemble des
+    pages d’un site et que Next.js fait un pré-rendering côté serveur de ces
+    pages.
+  </p>
+
+  <p>
+    Avec react seul, on modifierait une prop du state ou on changerait de
+    context en cliquant sur un bouton. Mais on aurait pas chargé de contenu html
+    donc pas de SEO… dommage.
+  </p>
+
+  <p>
+    Next.js fabrique toutes les pages possibles compte-tenu des propriétés
+    fournies, donc y compris la prop qui définie le thème… mais s’il est choisi
+    côté serveur, seuls les styles correspondant au thème au moment du build
+    sont chargés, alors comment le modifier côté client ?
+  </p>
+
+  <p>
+    Bref, les différents styles et valeurs de la prop thème doivent être
+    fournies au moment du built et Next.js fera un pré-rendering de toutes les
+    pages dans chaque thème fourni.
+  </p>
+
+  <p>Avec Next + styled-components les étapes sont :</p>
+
+  <ul>
+    <li>– Utiliser le ThemeProvider fourni par styled-components,</li>
+
+    <li>
+      – Au niveau de chaque page, fournir les différentes valeurs de la prop «
+      theme » qui sera fournie pour choisir le thème,
+    </li>
+
+    <li>
+      – Finalement, paramétrer Next.js pour inclure les styles de
+      styled-component au moment du build,
+    </li>
+  </ul>
+
+  <h2>1/ Utiliser le « theme provider » de styled-component</h2>
+  <p>
+    On fournit ainsi le style correspondant à une prop « theme » à chaque page
+  </p>
+
+  <p>L’exemple fourni dans la doc est très bien :</p>
+
+  <a href="https://styled-components.com/docs/advanced#theming"
+    >https://styled-components.com/docs/advanced#theming</a
+  >
+  <figure><img src="7.png" alt="code lines" /></figure>
+
+  <p>Sur la base de cet exemple, j’ai choisi de m’organiser en créant :</p>
+
+  <p>
+    – un composant Layout.js qui contient les composants communs à toutes les
+    pages,
+  </p>
+
+  <p>
+    – un composant Theme.js qui fourni le ThemeProvider (le thème choisi) +
+    GlobalStyles.js (les styles communs dans toute l’application) à Layout.js,
+  </p>
+  <figure>
+    <img src="8.png" alt="code lines" />
+    <figcaption>Layout.js</figcaption>
+  </figure>
+  <figure>
+    <img src="8-1.png" alt="code lines" />
+    <figcaption>Theme.js</figcaption>
+  </figure>
+
+  <h2>
+    2/ Prévoir la prop qui définie le thème dans les méthodes getStaticProps()
+    et getStaticPath() des pages Next.js
+  </h2>
+  <p>
+    Il s’agit ici de l’utilisation basic de Next.js pour le pré-rendering d’une
+    page.
+  </p>
+
+  <p>
+    La valeur du thème à appliquer est définie par la valeur de l’url de la page
+    affichée (slug).
+  </p>
+  <figure>
+    <img src="9.png" alt="code lines" />
+  </figure>
+  <p>
+    <em
+      >Note les themes ‘dark’ et ‘light’ sont de simples objets javascript ayant
+      la forme : { cssPropName: `value`, }</em
+    >
+  </p>
+
+  <h2>
+    3/ paramétrer Next.js pour inclure les styles de styled-component au moment
+    du build,
+  </h2>
+  <p>
+    Fournir la prop du thème et les différentes url ne suffit pas à charger tous
+    les styles, pour cela il faut modifier le ficher _document.js fourni par
+    next/document, (lien :
+    https://github.com/vercel/next.js/tree/master/examples/with-styled-components),
+  </p>
+  <figure>
+    <img src="10.png" alt="code lines" />
+  </figure>
+  <p>
+    Beaucoup d’autres possibilités sont détaillées dans la doc, à titre
+    personnel je trouve très pratique d’avoir directement un composant et de
+    pouvoir modifier son style aussi facilement. Avoir la possibilité d’utiliser
+    Emmet classerait les styled-components en tête de mes préférences pour gérer
+    les styles.
+  </p>
+</article>
