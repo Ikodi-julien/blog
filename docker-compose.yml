@@ -24,7 +24,7 @@ services:
       - DB_DATABASE=blog
     volumes:
       - "./larablog:/app"
-      - "./posts_html:/app/posts_html"
+      - "./posts_html:/app/public/posts_html"
     depends_on:
       - mariadb
 

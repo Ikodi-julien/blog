@@ -18,7 +18,8 @@ Objectifs du jour :
   - Affichage d'un post d'après le titre dans l'url -> ok
     commit -> ok
 - Voir comment persister les données db avec docker -> ok (ajout d'un volume en lien avec host pour les datas)
-  commit ->
+  commit -> ok
+- Fix lien img des posts, avec docker-compose le volume virtuel posts_html de larablog est passé dans /public + commit -> ok
 
 ## Le 27/02/2022
 
