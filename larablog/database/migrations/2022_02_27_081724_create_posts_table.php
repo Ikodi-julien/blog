@@ -15,7 +15,7 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('author', 255);
+            $table->string('author', 255)->default('Julien');
             $table->string('title', 255);
             $table->text('short');
             $table->string('content_path', 50);

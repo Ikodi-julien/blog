@@ -8,9 +8,13 @@ Objectifs du jour :
     commit -> ok
   - Ajouter la liste des catégories dans un select au create d'un nouveau post ->
     ok
+  - Création d'un AdminController pour gérer les catégories -> ok
+  - Faire migration pour ajout table intermédiaire post_category -> ok
   - La création d'un post avec une catégorie fonctionne -> ok
-  - La création d'un post avec plusieurs catégories fonctionne ->
-    commit ->
+  - La création d'un post avec plusieurs catégories fonctionne -> ok
+    commit -> ok
+- Faire seeding posts -> ok
+  commit ->
 - Faire le tri des posts selon catégorie,
 - Afficher les derniers posts dans le composant "Articles réçents",
 - Formulaire de connexion + protéger la route admin,
