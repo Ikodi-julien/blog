@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Throwable;
 
 class PostController extends Controller
 {
     public function createPost(){
-        // dd(request());
         // Validation des données
         request()->validate([
             'categorie1' => 'required',
@@ -49,7 +49,6 @@ class PostController extends Controller
     }
 
     public function list() {
-        // dd(request('category'));
         if (request('category') === "all-categories") {
             $posts = Post::all();
         } else {
@@ -60,8 +59,21 @@ class PostController extends Controller
         return view('post.list', ['posts' => $posts]);
     }
 
-    public function show() {
+    public function showOne() {
 
         return view('post.post', ['filePath' => request('filePath')]);
+    }
+
+    public function landing() {
+        $posts = Post::all()->sortByDesc('created_at');
+        // On garde les $i premiers
+        for ($i = 0; $i < 3; $i++) {
+            $withCat[] = [
+                'post' => $posts[$i],
+                'categories' => $posts[$i]->categories
+            ];
+        }
+        // dd($withCat);
+        return view('landing.landing', ['postWithCat' => $withCat]);
     }
 }

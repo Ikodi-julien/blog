@@ -15,7 +15,7 @@ use App\Http\Controllers\PostController;
 */
 
 Route::get('/', [PostController::class, 'landing']);
-Route::get('/javascript/{filePath}', [PostController::class, 'show']);
+Route::get('/javascript/{filePath}', [PostController::class, 'showOne']);
 Route::get('/{category}', [PostController::class, 'list']);
 Route::get('/admin/new_post', [AdminController::class, 'newPost']);
 Route::post('/admin/new_post', [PostController::class, 'createPost']);
