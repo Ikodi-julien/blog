@@ -14,7 +14,7 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        $categories = ['Javascript', 'PHP', 'Methodologie', 'DevOps', 'CSS-SCSS',];
+        $categories = ['javascript', 'php', 'methodologie', 'devops', 'css-scss',];
 
         foreach ($categories as $category) {
             DB::table('categories')->insert(['name' => $category]);

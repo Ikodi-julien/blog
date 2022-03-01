@@ -50,7 +50,13 @@ class PostController extends Controller
 
     public function list() {
         // dd(request('category'));
-        $posts = Post::all();
+        if (request('category') === "all-categories") {
+            $posts = Post::all();
+        } else {
+            $category = Category::where('name', request('category'))->first();
+            $posts = $category->posts;
+        }
+
         return view('post.list', ['posts' => $posts]);
     }
 

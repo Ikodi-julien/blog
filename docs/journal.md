@@ -14,8 +14,9 @@ Objectifs du jour :
   - La création d'un post avec plusieurs catégories fonctionne -> ok
     commit -> ok
 - Faire seeding posts -> ok
+  commit -> ok
+- Faire le tri des posts selon catégorie -> ok
   commit ->
-- Faire le tri des posts selon catégorie,
 - Afficher les derniers posts dans le composant "Articles réçents",
 - Formulaire de connexion + protéger la route admin,
 - Faire un joli design,

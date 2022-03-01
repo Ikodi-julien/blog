@@ -18,7 +18,7 @@ class PostSeeder extends Seeder
     {
         $posts = [
             [
-                'categories' => ['Methodologie', 'Javascript'],
+                'categories' => ['methodologie', 'javascript'],
                 'post' => new Post([
                     'title' => 'Retour d\'expérience | Projet authentification avec Vue.js + Node.js',
                     'short' => 'Un court billet pour garder une trace des différentes étapes de ce
@@ -28,7 +28,7 @@ class PostSeeder extends Seeder
                 ])
             ],
             [
-                'categories' => ['Methodologie', 'Javascript'],
+                'categories' => ['methodologie', 'javascript'],
                 'post' => new Post([
                     'title' => 'Vérification de l’email à la création d’un compte – Reset password – Node.js',
                     'short' => 'Dans cet article je détaille comment mettre en place la vérification de la validité d’un email lors de la création d’un compte utilisateur. Notamment l’utilisation de json web token et les routes à utiliser / créer côté serveur.\lnSur le même principe, je détaille également le flow du reset du mot de passe de l’utilisateur. En plus d’être à durée limitée le lien fourni sera à usage unique.',
@@ -36,7 +36,7 @@ class PostSeeder extends Seeder
                     'read_duration' => 10
                 ])
             ], [
-                'categories' => ['CSS-SCSS', 'Javascript'],
+                'categories' => ['css-scss', 'javascript'],
                 'post' => new Post([
                     'title' => 'React styled-components et Next.js',
                     'short' => 'Styled-components, comme son nom l’indique, fournit directement des composants react avec des styles associés. Dans un fichier javascript, le css est lié à un composant créé grâce à la fonction fournie par styled-components et aux littéraux de gabarit (les backticks « ). C’est ce composant qui est ensuite exporté pour être affiché.',
