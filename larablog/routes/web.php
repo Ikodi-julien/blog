@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 /*
@@ -18,5 +19,5 @@ Route::get('/', function () {
 });
 Route::get('/javascript/{filePath}', [PostController::class, 'show']);
 Route::get('/{category}', [PostController::class, 'list']);
-Route::view('/admin/new_post', 'admin.newpost');
+Route::get('/admin/new_post', [AdminController::class, 'newPost']);
 Route::post('/admin/new_post', [PostController::class, 'createPost']);

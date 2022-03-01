@@ -41,6 +41,30 @@
         <p class="flash-error">*{{ $errors->first('read_duration') }}</p>
         @endif
       </div>
+
+      <div class="mb-3">
+        <label for="categorie1" class="form-label">Catégorie:</label>
+        <select class="form-select" name="categorie1" >
+            <option value=""></option>
+            @foreach ($categories as $category)
+            <option value="{{$category->name}}">{{$category->name}}</option>
+          @endforeach
+        </select>
+        @if ($errors->has('categorie1'))
+        <p class="flash-error">*{{ $errors->first('categorie1') }}</p>
+        @endif
+      </div>
+
+      <div class="mb-3">
+        <label for="categorie2" class="form-label">Autre catégorie:</label>
+        <select class="form-select" name="categorie2" >
+            <option value=""></option>
+            @foreach ($categories as $category)
+            <option value="{{$category->name}}">{{$category->name}}</option>
+          @endforeach
+        </select>
+      </div>
+
       <div class="col-12">
         <button type="submit" class="btn btn-primary">Valider</button>
       </div>

@@ -5,9 +5,12 @@ Objectifs du jour :
 - Ajouter les catégories aux posts, avec relation selon MCD svp :
   - Faire un seeder pour les catégories -> ok,
   - Faire relation manyToMany entre categories et posts -> ok,
+    commit -> ok
   - Ajouter la liste des catégories dans un select au create d'un nouveau post ->
-  - La création d'un post avec une catégorie fonctionne ->
+    ok
+  - La création d'un post avec une catégorie fonctionne -> ok
   - La création d'un post avec plusieurs catégories fonctionne ->
+    commit ->
 - Faire le tri des posts selon catégorie,
 - Afficher les derniers posts dans le composant "Articles réçents",
 - Formulaire de connexion + protéger la route admin,
