@@ -18,9 +18,14 @@ Objectifs du jour :
 - Faire le tri des posts selon catégorie -> ok
   commit -> ok
 - Afficher les derniers posts dans le composant "Articles réçents" -> ok (plus compliqué que prévu, pas vraiment trouvé comment récupérer un post et ses catégories dans le même objet, les icons bootstrap et fontawesome pas terribles).
-  commit ->
-- Formulaire de connexion + protéger la route admin,
+  commit -> ok
+- Formulaire de connexion + protéger la route admin:
+  - Faire page formulaire de connexion -> ok
+  - Faire method connexion -> ok
+    commit ->
+  - Faire middleware et gérer le disable de la page admin ->
 - Faire un joli design,
+- 1er deploy,
 
 ## Le 28/02/2022
 

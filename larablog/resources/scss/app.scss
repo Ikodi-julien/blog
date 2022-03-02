@@ -1,7 +1,13 @@
 @import "bootstrap";
-
+body {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  min-height: 100vh;
+}
 main {
   padding: 1rem;
+  flex: 1;
 }
 section {
   display: flex;
@@ -36,4 +42,10 @@ section {
 .list-group {
   width: auto;
   max-width: 460px;
+}
+.form-signin {
+  width: auto;
+  max-width: 600px;
+  margin: auto;
+  padding: 1rem;
 }

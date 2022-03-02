@@ -12,7 +12,9 @@
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				@include('partials.header.navbar-item', ['link' => '/', 'text' => 'Accueil'])
 				@include('partials.header.navbar-item', ['link' => 'all-categories', 'text' => 'Articles'])
-				@include('partials.header.navbar-item', ['link' => 'admin/new_post', 'text' => 'Upload'])
+				@include('partials.header.navbar-item', ['link' => 'admin/new_post', 'text' => 'Admin'])
+				@include('partials.header.navbar-item', ['link' => 'connexion', 'text' => 'Connexion'])
+
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 						Plus
