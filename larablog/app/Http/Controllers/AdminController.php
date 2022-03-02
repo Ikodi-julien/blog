@@ -28,7 +28,7 @@ class AdminController extends Controller
         }
 
         return back()->withErrors([
-            'password' => 'The provided credentials do not match our records.',
+            'password' => 'Mot de passe et/ou email ne sont pas reconnus.',
         ]);
     }
 }

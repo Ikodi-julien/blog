@@ -1,8 +1,10 @@
 @extends('layout.app')
 @section('content')
 <main class="form-signin">
-  <form action="" method="POST">
+    @include('flash::message')
+    <form action="" method="POST">
     <h1 class="h3 mb-3 fw-normal">Connexion</h1>
+
     {{ csrf_field() }}
     <div class="form-floating">
       <input type="email" class="form-control" name="email" placeholder="Email">

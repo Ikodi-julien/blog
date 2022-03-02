@@ -1,3 +1,13 @@
+## Le 30/02/2022
+
+Objectifs du jour :
+
+- Faire middleware contrôle accès /admin -> ok
+  commit ->
+- Gérer le disable du lien de la page admin ->
+- 1er deploy ->
+- Faire un joli design ->
+
 ## Le 29/02/2022
 
 Objectifs du jour :
@@ -22,10 +32,7 @@ Objectifs du jour :
 - Formulaire de connexion + protéger la route admin:
   - Faire page formulaire de connexion -> ok
   - Faire method connexion -> ok
-    commit ->
-  - Faire middleware et gérer le disable de la page admin ->
-- Faire un joli design,
-- 1er deploy,
+    commit -> ok
 
 ## Le 28/02/2022
 
