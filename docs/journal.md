@@ -5,6 +5,9 @@ Objectifs du jour :
 - Faire middleware contrôle accès /admin -> ok
   commit -> ok
 - Gérer le disable du lien de la page admin -> ok
+  commit -> ok
+- Revoir design navbar -> ok
+- Revoir design latest posts -> ok
   commit ->
 - 1er deploy ->
 - Faire un joli design ->

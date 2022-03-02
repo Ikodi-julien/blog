@@ -70,7 +70,8 @@ class PostController extends Controller
         for ($i = 0; $i < 3; $i++) {
             $withCat[] = [
                 'post' => $posts[$i],
-                'categories' => $posts[$i]->categories
+                'categories' => $posts[$i]->categories,
+                'date' => implode(array_slice(str_split($posts[$i]->created_at), 0, 10))
             ];
         }
         // dd($withCat);

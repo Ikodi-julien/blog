@@ -20,6 +20,12 @@ section {
   height: 40px;
   background: center/contain no-repeat url("../assets/logo_ikodi_carre.png");
 }
+.myrow {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  margin-right: 30px;
+}
 .createform__container {
   width: auto;
   margin: auto;

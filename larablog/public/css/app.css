@@ -11308,6 +11308,15 @@ section {
   background: center/contain no-repeat url(/images/logo_ikodi_carre.png?00a8780f70fd87abdecb1e627fce9b9d);
 }
 
+.myrow {
+  display: flex;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  align-items: center;
+  margin-right: 30px;
+}
+
 .createform__container {
   width: auto;
   margin: auto;
