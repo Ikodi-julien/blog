@@ -4,7 +4,7 @@
 
 		@foreach ($postWithCat as $post)
 
-		<a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+		<a href="{{url('article/' . $post['post']->content_path)}}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
 			<div class="flex-column">
 				@foreach ($post['categories'] as $category)
 					@include('partials.icons.' . $category->name)

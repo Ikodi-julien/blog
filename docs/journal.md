@@ -9,6 +9,7 @@ Objectifs du jour :
 - Revoir design navbar -> ok
 - Revoir design latest posts -> ok
   commit ->
+- Revoir design d'un post ->
 - 1er deploy ->
 - Faire un joli design ->
 
