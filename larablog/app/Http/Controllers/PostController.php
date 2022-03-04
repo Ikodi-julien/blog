@@ -33,7 +33,7 @@ class PostController extends Controller
             $post->save();
             $cat1 = Category::where('name', request('categorie1'))->firstOrFail();
             $post->categories()->attach($cat1);
-            if (request('categorie2') !== '') {
+            if (request('categorie2')) {
                 $cat2 = Category::where('name', request('categorie2'))->firstOrFail();
                 $post->categories()->attach($cat2);
             }

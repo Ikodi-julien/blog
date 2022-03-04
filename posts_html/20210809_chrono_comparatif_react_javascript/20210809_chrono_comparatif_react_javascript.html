@@ -1,0 +1,371 @@
+<article>
+  <h1>Un Chrono - Comparatif Javascript / React+Redux - + bonus async/await</h1>
+  <ul class="post-metas">
+    <li>Author:julien</li>
+    <li>Published: 9 août 2021</li>
+    <li>Category: JavaScript</li>
+    <li>Durée lecture: 15mn</li>
+  </ul>
+
+  <p class="post-short">
+    <em
+      >Actuellement en pleine refonte du projet « Chronofit » avec React+Redux,
+      une app d’enchainement d’intervals chronométrés destinée aux sportifs
+      (enfin surtout pour moi…) initialement en PHP + VanillaJS, j’ai du refaire
+      la logique algorythmique du chrono.</em
+    >
+  </p>
+
+  <p>
+    L’objectif ici est de faire un comparatif rapide entre les deux solutions
+    mises en place, du point de vue javascript, pas de html/css ici :
+  </p>
+
+  <ul>
+    <li>La classe Chrono en VanillaJS,</li>
+    <li>Le life cycle avec React-Redux,</li>
+  </ul>
+
+  <h2>La classe Chrono en VanillaJS</h2>
+  <p>
+    La classe chrono ci-dessous procure ses méthodes de contrôle et nécessite un
+    élément du DOM pour son instanciation (le temps du chrono s’affichera
+    dedans) :
+  </p>
+  <pre>
+    <code>
+      
+      /**
+      * Object Chrono,
+      * ATTRIBUTS D'INSTANCE :
+      *  - startTime = integer, le temps de départ (0 par défaut)
+      *  - display = HTMLElement dans lequel afficher,
+      *  - interval = représente setInterval en cours.
+      *
+      * FONCTIONS :
+      * - countAhead : Compte de 0 jusqu'à l'info de stopper, +1 à chaque seconde
+      * - countDown : Compte à rebours depuis un temps donner jusqu'à 0,
+      *    - return void
+      * - stop : Arrête countAhead et countDown,
+      *    - return this.startTime
+      * - timeDislay : méthode interne
+      *    - return string
+      * - playFirstBip : envoi les premiers Bips
+      * - playFinalBip : envoi le Bip final
+      */
+      class Chrono {
+        constructor(startTime, display) {
+          this.startTime = startTime;
+          this.display = display;
+          this.interval = 0;
+          this.nextCountDown = false;
+          console.log(&amp;nouvel objet Chrono créé&amp;);
+        }
+      
+        countAhead() {
+          console.log(&amp;départ chrono sur = &amp; + this.display);
+      
+          const aRepeter = () => {
+            // On affiche le temps
+            this.display.innerText = this.startTime;
+            this.startTime += 1;
+          };
+          this.interval = setInterval(aRepeter, 1000);
+        }
+      
+        countDown() {
+          console.log(&amp;départ compte à rebours&amp;);
+          let timeString = this.timeDisplay();
+          // this.display.innerText = timeString;
+      
+          const aRepeter = () => {
+            if (this.startTime <= 0) {
+              clearInterval(this.interval);
+            } else {
+              this.startTime--;
+              timeString = this.timeDisplay();
+              this.display.innerText = timeString;
+      
+              if (this.startTime > 0 && this.startTime < 3) {
+                this.playFirstBip();
+              }
+              if (this.startTime == 0) this.playFinalBip();
+            }
+          };
+          aRepeter();
+          this.interval = setInterval(aRepeter, 1000);
+        }
+      
+        stop() {
+          console.log(&amp;Arrêt du chrono&amp;);
+          clearInterval(this.interval);
+          this.interval = 0;
+          let timeString = this.timeDisplay();
+          this.display.innerText = timeString;
+          return this.startTime;
+        }
+      
+        timeDisplay() {
+          let unitMin = Math.floor((this.startTime / 60) % 10);
+          let tenMin = Math.floor(this.startTime / 600);
+      
+          let unitSec = Math.floor((this.startTime % 60) % 10);
+          let tenSec = Math.floor((this.startTime % 60) / 10);
+      
+          let string = tenMin + &amp;&amp; + unitMin + &amp;:&amp; + tenSec + &amp;&amp; + unitSec;
+          return string;
+        }
+      
+        playFirstBip() {
+          console.log(&amp;on fait Bip !&amp;);
+      
+          let firstBip = new Audio(&amp;./public/sounds/first_bips.wav&amp;);
+          firstBip.play();
+        }
+      
+        playFinalBip() {
+          console.log(&amp;on fait le bip final !&amp;);
+      
+          let finalBip = new Audio(&amp;./public/sounds/final_bip.wav&amp;);
+          finalBip.play();
+        }
+      }
+    </code>
+  </pre>
+
+  <p>
+    Alors ça fonctionne bien, ça pourrait probablement être adapté à un
+    composant React sous forme de classe avec son propre state. Cependant, j’ai
+    choisi d’utiliser React+Redux et le life-cycle me permet d’obtenir les mêmes
+    effets mais avec une logique éclatée.
+  </p>
+
+  <h2>Le life cycle avec React-Redux</h2>
+  <p>Le composant Chrono, difficile de faire plus simple :</p>
+
+  <pre>
+    <code>
+    const Chrono = ({time, text, isCounting, setTime}) => {
+    
+      useEffect(() => {
+    
+        if (isCounting){
+            setTimeout(() => {setTime(time + .1)}, 100 )
+          }
+      }, [time, isCounting, setTime])
+    
+      return(
+        &lt;div className=&amp;readtraining__timedisplay&amp;&gt;
+          {text !== &amp;&amp; && &lt;div className=&amp;readtraining__timedisplay__text&amp;&gt;
+            {text}
+            &lt;/div&gt;}
+      
+          &lt;div className=&amp;readtraining__timedisplay__time&amp;&gt;
+            {trainingServices.formatChrono(time)}
+          &lt;/div&gt;
+        &lt;/div&gt;
+    )}
+    
+    export default Chrono;
+  </code>
+</pre>
+  <p>
+    Donc le principe, après le render du composant ‘Chrono’ useEffect()
+    déclenche la mise à jour de la prop ‘time’ dans le store après 0.1s.
+  </p>
+
+  <p>
+    La mise à jour de la prop ‘time’ provoque un nouveau render via le reducer
+    puis le store, en ainsi de suite tant que la prop ‘isCounting’ vaut ‘true’.
+  </p>
+
+  <p>Extrait du reducer :</p>
+
+  <pre>
+      <code>
+    ...
+        case SET_EXOPLAYING_TIME:
+          return {
+            ...state,
+            exoPlaying: {
+              ...state.exoPlaying,
+              currentTime: action.time,
+            }
+          }
+    ...
+  </code>
+</pre>
+  <p>
+    La mise en pause et la reprise du chrono sont effectuées grâce à des actions
+    dispatchées dans le store via des boutons de contrôles dans l’UI.
+  </p>
+
+  <p>Par exemple le bonton ‘Play’ du chrono :</p>
+  <pre>
+    <code>
+    &lt;button
+      className=&amp;training__button --transparent --xxl&amp;
+      onClick={() =&gt; startChrono()}
+    &gt;
+      &lt;i className=&amp;fas fa-play&amp;&gt;&lt;/i&gt;
+    &lt;/button&gt;
+  </code>
+</pre>
+  <p>Dispatch l’action dans le reducer :</p>
+
+  <pre>
+    <code>
+        case START_CHRONO:
+          return {
+            ...state,
+            exoPlaying: {
+              ...state.exoPlaying,
+              isCounting: true,
+            },
+            globalTime: {
+              ...state.globalTime,
+              isCounting: true,
+            },
+          }
+        </code>
+      </pre>
+  <p>
+    On voit ici que l’action ‘START_CHRONO’ déclenchera au final la mise en
+    route de deux Chrono différents, celui de l’exercice en cours et celui
+    général pour l’ensemble des exercices enchainés.
+  </p>
+
+  <p>
+    Ce qui amène à la problématique de l’enchainement complexe de comptes à
+    rebours.
+  </p>
+
+  <p>
+    L’utilisation de ‘setTimeout’ c’est super pratique… oui mais voilà, pour
+    certains entrainements il me faut enchainer des comptes à rebours et avoir
+    un compte à rebours général.
+  </p>
+
+  <p>
+    La fin d’un compte à rebours d’exercice ou le changement d’exercice provoqué
+    par l’utilisateur doit mettre à jour le compte à rebours général.
+  </p>
+
+  <p>
+    Or, chaque mise à jour de la prop affichée par le compte à rebours général,
+    que ce soit par le composant compte à rebours lui-même ou par le changement
+    d’exercice, déclenche un ‘setTimeout()’… c’est le bordel.
+  </p>
+
+  <p>
+    Une solution simple, c’est de rajouter une prop dans le state pour indiquer
+    au composant ‘GlobalCountDown’ de ne pas envoyer d’action (donc pas de
+    setTimeout()) pour modifier sa prop ‘time’ quand elle vient d’être modifiée
+    par un changement d’exercice.
+  </p>
+
+  <h3>Le ‘GlobalCountDown’ :</h3>
+  <pre>
+    <code>
+    const GlobalCountDown = ({time, text, isCounting, setTime, resetCurrent, setResetCurrent}) => {
+    
+      useEffect(() => {
+    
+        if (isCounting){
+          if (resetCurrent) {
+            // ExoPlaying changes
+            setTimeout(() => {
+              setResetCurrent(false);
+            }, 100 );
+            return
+          }
+          if (time > 0.1) {
+            setTimeout(() => {setTime(time - .1)}, 100 );
+            return
+          }
+          //
+          setTime(0)
+        }
+      }, [time, isCounting, setTime, resetCurrent, setResetCurrent])
+    </code>
+  </pre>
+  <p>La mise à jour de la prop dans le reducer au changement d’exercice :</p>
+  <pre>
+    <code>
+      case SET_CURRENT_EXO:
+        if (state.timeline[exoIndex].beginning) exoIndex++;
+        if (exoIndex === state.timeline.length - 1) return state;
+      
+        return {
+            ...state,
+          exoPlaying: {
+            ...state.exoPlaying,
+            currentTime: state.timeline[exoIndex].duration,
+          },
+          globalTime: {
+            ...state.globalTime,
+            resetCurrent: true,
+            currentTime: trainingServices.getRemainingDuration(state.timeline, exoIndex),
+          }
+        }
+      </code>
+    </pre>
+  <p>
+    Finalement, je suis parti sur une solution un peu plus stylée à base de
+    promise et async/await 🙂
+  </p>
+
+  <h2>Bonus async/await</h2>
+  <p>
+    Le petit problème avec le setTimeout, quand il a une callback qui gère de la
+    donnée, c’est que la valeur de cette donnée est fixée au moment de
+    l’exécution du setTimeout, pas au moment de l’exécution de sa callback. Donc
+    si la valeur de la donnée a changer entre temps, c’est la galère.
+  </p>
+
+  <p>
+    L’utilisation d’une fonction asynchrone me permet d’attendre le temps prévu
+    puis ensuite de comparer mes données à leur valeur actuelle, c’est quand
+    même plus propre dans la logique.
+  </p>
+
+  <p>Pour mettre en place le principe, il faut :</p>
+
+  <ul>
+    <li>Une fonction qui renvoit une Promise,</li>
+    <li>
+      Une fonction asynchrone qui attend que la Promise se résolve avant de
+      passer à la suite,
+    </li>
+  </ul>
+  <p>La fonction avec Promise :</p>
+
+  <pre>
+    <code>
+    wait100ms = () => new Promise((resolve) => {
+      setTimeout(() => resolve(), 100);
+    }
+  </code>
+</pre>
+  <p>
+    La fonction asynchrone (auto-executable) dans le useEffect de mon Chrono :
+  </p>
+  <pre>
+    <code>
+    const Chrono = ({ time, isCounting, setChronoTime }) => {
+      useEffect(() => {
+    
+        (async() => {
+    
+          await wait100ms();
+    
+          if (isCounting ){
+            setChronoTime(time + .1)
+          }
+        })()
+    
+      }, [time, isCounting, setChronoTime])
+    </code>
+  </pre>
+  <p>Fini pour aujourd’hui 🙂</p>
+</article>

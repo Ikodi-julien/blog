@@ -69,7 +69,8 @@
 
   <p>Il contient les infos suivantes :</p>
 
-  <textarea class="script text" disabled>
+  <pre>
+    <code>
 # alias for upstream apps
 upstream topics {
     server localhost:0000;
@@ -86,7 +87,8 @@ upstream chronofitapi {
 upstream chronofit {
     server localhost:3333;
 }
-  </textarea>
+</code>
+</pre>
 
   <p>
     Ce fichier permet à nginx de faire le lien entre les requêtes qui arrivent
@@ -118,12 +120,14 @@ upstream chronofit {
     utilisée pour définir le contenu du header :
   </p>
 
-  <textarea class="script text" disabled>
+  <pre>
+    <code>
 map $http_x_forwarded_host $custom_forwarded_host { 
   default "$server_name";
   topics: "topics";
 }
-  </textarea>
+</code>
+</pre>
   <p>
     Le bloc server est ensuite défini pour le port 80 avec redirect en https, la
     variable server_name défini à quel requête répondre, ici à celles
@@ -131,7 +135,8 @@ map $http_x_forwarded_host $custom_forwarded_host {
     fait vers l’upstream correspondant via la variable « $server_name » :
   </p>
 
-  <textarea class="script text" disabled>
+  <pre>
+    <code>
 server { 
   # Listen HTTP
   listen 80;
@@ -140,14 +145,16 @@ server {
   # Redirect to HTTPS // API 
   return 301 https://$host$request_uri;
 }
-  </textarea>
+</code>
+</pre>
 
   <p>
     Pour finir, le comportement est défini pour les requêtes à « $server_name »
     sur le port 443.
   </p>
 
-  <textarea class="script text" disabled>
+  <pre>
+    <code>
 server { 
   # Listen HTTPS 
   listen 443 ssl; 
@@ -176,7 +183,8 @@ server {
     proxy_set_header Connection "Upgrade";
   }
 }
-  </textarea>
+</code>
+</pre>
   <p>
     La configuration des certificats fera l’objet d’un chapitre, ici je voudrais
     détailler le contenu du header transmis par nginx à l’application. En mode
