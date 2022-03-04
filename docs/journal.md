@@ -10,12 +10,18 @@ Objectifs du jour:
     - sites-availables .conf -> ok
     - sites-enables symlink -> ok
   - certbot / https -> ok
-  - Faire et teste docker-compose-prod:
+  - Faire et tester docker-compose-prod:
     - Ajout env vars pour db -> ok (commit pour deploy)
-  - Il est vivant !!! ->
+    - Mise à jour Readme avec consignes install prod -> ok
+  - Il est vivant !!! -> yes ! (commit DOC)
 - Ajouter 2 ou 3 autres articles ->
 - Rédiger un article sur la création du blog avec Laravel ->
 - Faire un joli design ->
+
+_Issues_
+
+- Mettre en forme les articles sur un même model,
+- Les liens des boutons du Héro ne sont pas définis -> ok (commit)
 
 ## Le 01/03/2022
 
