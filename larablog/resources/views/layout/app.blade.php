@@ -16,5 +16,5 @@
     @yield('content')
     @include('partials.footer.footer')
 </body>
-<script type="module" src="{{ asset('js/app.js')}}"></script>
+<script type="module" src="/js/app.js"></script>
 </html>
