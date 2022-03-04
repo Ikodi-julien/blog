@@ -4,10 +4,17 @@ Objectifs du jour:
 
 - Revoir design d'un post -> ok (commit)
 - 1er deploy:
-  - DNS ->
-  - config nginx ->
-  - certbot / https ->
+  - DNS -> ok
+  - config nginx:
+    - upstream -> ok
+    - sites-availables .conf -> ok
+    - sites-enables symlink -> ok
+  - certbot / https -> ok
+  - Faire et teste docker-compose-prod:
+    - Ajout env vars pour db -> ok (commit pour deploy)
   - Il est vivant !!! ->
+- Ajouter 2 ou 3 autres articles ->
+- Rédiger un article sur la création du blog avec Laravel ->
 - Faire un joli design ->
 
 ## Le 01/03/2022

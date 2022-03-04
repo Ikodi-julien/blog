@@ -1,1 +1,3 @@
 mariadb_persistence/data
+passwordreset.sql
+docker-compose-prod.yml
