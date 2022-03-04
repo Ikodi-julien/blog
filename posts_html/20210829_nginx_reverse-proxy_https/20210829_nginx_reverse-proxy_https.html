@@ -1,0 +1,273 @@
+<article>
+  <h1>
+    Paramétrer nginx en reverse- proxy pour plusieurs sites + https avec certbot
+  </h1>
+
+  <ul class="post-metas">
+    <li>Author: Julien</li>
+    <li>Published: 29 août 2021</li>
+    <li>Category: DevOps / Méthodologie</li>
+    <li>Durée lecture: 10mn</li>
+  </ul>
+
+  <p class="post-short">
+    <em
+      >L’objectif ici est de détailler le paramétrage de nginx en reverse-proxy
+      pour plusieurs app ou sites, c’est à dire comme « gare de triage » entre
+      le serveur (AWS en ce qui me concerne) et les différents sites présents
+      sur mon unique instance EC2-ubuntu. N’étant pas un spécialiste du
+      paramétrage de nginx les solutions proposées ne sont pas forcément les
+      meilleures, mais ça fonctionne pour moi donc…</em
+    >
+  </p>
+
+  <h3>Sommaire :</h3>
+
+  <ul>
+    <li>Installer nginx,</li>
+    <li>Principe de nginx en reverse-proxy,</li>
+    <li>Le fichier upstream,</li>
+    <li>Exemple d’un fichier de conf d’un site,</li>
+    <li>Certificat pour https avec certbot,</li>
+  </ul>
+
+  <h2>Installer nginx</h2>
+  <p>
+    ressource :
+    <a
+      href="https://www.nginx.com/resources/wiki/start/topics/tutorials/install/"
+      >https://www.nginx.com/resources/wiki/start/topics/tutorials/install/</a
+    >
+  </p>
+
+  <h2>Principe de nginx en reverse-proxy</h2>
+  <p>
+    ressource:
+    <a
+      href="https://openclassrooms.com/fr/courses/1733551-gerez-votre-serveur-linux-et-ses-services/5236081-mettez-en-place-un-reverse-proxy-avec-nginx"
+      >https://openclassrooms.com/fr/courses/1733551-gerez-votre-serveur-linux-et-ses-services/5236081-mettez-en-place-un-reverse-proxy-avec-nginx</a
+    >
+  </p>
+
+  <p>
+    Comme très bien détaillé dans le lien ci-dessus, le serveur nginx va se
+    placer entre les applications qui écoute sur un port défini en « localhost »
+    de mon instance EC2 et le serveur qui traite la requête chez AWS.
+  </p>
+
+  <p>
+    Etant passé par d’autres tutos auparavant, la définition de mes upstreams,
+    c’est à dire vers quel port transférer les requêtes, est placée dans un
+    fichier séparé des fichiers de conf des sites ou apps.
+  </p>
+
+  <h2>La définition des upstreams</h2>
+  <p>
+    Mes alias d’upstream sont définis dans un fichier « upstream.conf » et placé
+    dans le répertoire « /etc/nginx/conf.d ».
+  </p>
+
+  <p>Il contient les infos suivantes :</p>
+
+  <textarea class="script text" disabled>
+# alias for upstream apps
+upstream topics {
+    server localhost:0000;
+}
+
+upstream strapi {
+    server localhost:1111;
+}
+
+upstream chronofitapi {
+    server localhost:2222;
+}
+
+upstream chronofit {
+    server localhost:3333;
+}
+  </textarea>
+
+  <p>
+    Ce fichier permet à nginx de faire le lien entre les requêtes qui arrivent
+    du web sur les ports « 80 » ou « 443 » et les applications qui écoutent sur
+    leur port dédié.
+  </p>
+
+  <p>
+    De plus, ce fichier défini des alias. Concrètement pour le premier exemple,
+    « topics » est défini comme un alias représentant le site servi sur le port
+    0000 en localhost.
+  </p>
+
+  <p>
+    Mais alors, les upstreams étant définis, il faudrait peut-être configurer
+    nginx pour indiquer qui fait quoi comment ?
+  </p>
+
+  <h2>Exemple d’un fichier de conf d’un site</h2>
+  <p>
+    Mon fichier de configuration n’est pas vraiment le même que celui proposé
+    par OpenClassroom (lien ci-dessus), c’est le résultat de mes errances sur le
+    web à la recherche de solutions.
+  </p>
+
+  <p>
+    Les premières lignes font le lien entre la requête et l’alias défini dans le
+    fichier upstream. La variable « $custom_forwarded_host » est créée puis sera
+    utilisée pour définir le contenu du header :
+  </p>
+
+  <textarea class="script text" disabled>
+map $http_x_forwarded_host $custom_forwarded_host { 
+  default "$server_name";
+  topics: "topics";
+}
+  </textarea>
+  <p>
+    Le bloc server est ensuite défini pour le port 80 avec redirect en https, la
+    variable server_name défini à quel requête répondre, ici à celles
+    s’adressant à « topics.ikodi.eu », avec le mappage ci-dessus le lien est
+    fait vers l’upstream correspondant via la variable « $server_name » :
+  </p>
+
+  <textarea class="script text" disabled>
+server { 
+  # Listen HTTP
+  listen 80;
+  server_name topics.ikodi.eu;
+  
+  # Redirect to HTTPS // API 
+  return 301 https://$host$request_uri;
+}
+  </textarea>
+
+  <p>
+    Pour finir, le comportement est défini pour les requêtes à « $server_name »
+    sur le port 443.
+  </p>
+
+  <textarea class="script text" disabled>
+server { 
+  # Listen HTTPS 
+  listen 443 ssl; 
+  server_name topics.ikodi.eu; 
+  
+  # Root
+  Location root /var/www/html; 
+
+  # SSL Config 
+  ssl_certificate     /etc/letsencrypt/live/topics.ikodi.eu/fullchain.pem; # managed by Certbot
+  ssl_certificate_key /etc/letsencrypt/live/topics.ikodi.eu/privkey.pem; # managed by Certbot
+  include             /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot 
+  ssl_dhparam         /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot 
+    
+  # Proxy Config
+  location / {
+    proxy_pass http://topics;
+    proxy_http_version 1.1;
+    proxy_set_header X-Forwarded-Host $custom_forwarded_host;
+    proxy_set_header X-Forwarded-Server $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header Host $http_host;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "Upgrade";
+  }
+}
+  </textarea>
+  <p>
+    La configuration des certificats fera l’objet d’un chapitre, ici je voudrais
+    détailler le contenu du header transmis par nginx à l’application. En mode
+    reverse-proxy, nginx utilise des headers non-standards pour informer le
+    server upstream :
+  </p>
+
+  <p>
+    ressource:
+    <a
+      href="https://www.nginx.com/resources/wiki/start/topics/examples/headers_management/"
+      >https://www.nginx.com/resources/wiki/start/topics/examples/headers_management/</a
+    >
+  </p>
+
+  <p>
+    <a href="https://linuxize.com/post/nginx-reverse-proxy/"
+      >https://linuxize.com/post/nginx-reverse-proxy/</a
+    >
+  </p>
+
+  <ul>
+    <li>proxy_pass http://topics : on fait le lien avec l’alias topics,</li>
+    <li>
+      proxy_set_header X-Forwarded-Host $custom_forwarded_host : Indique le
+      domaine original « requêté » par le client,
+    </li>
+    <li>
+      proxy_set_header X-Forwarded-Server $host: La variable $host est
+      susceptible de contenir dans l’ordre soit le domaine fourni dans la
+      requête ou le domaine indiqué dans le champs « Host » de la requête ou
+      $server_name si celui-ci correspond à la requête.
+    </li>
+    <li>
+      proxy_set_header X-Real-IP $remote_addr : Indique l’IP du client
+      d’origine,
+    </li>
+    <li>
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for : Une liste
+      des adresses IP de tous les serveurs que la requête du client a traversé,
+      $remote_addr par défaut.
+    </li>
+    <li>
+      proxy_set_header X-Forwarded-Proto $scheme : Dans un bloc server https,
+      toutes les réponse sont réécrites en https.
+    </li>
+    <li>
+      proxy_set_header Host $http_host : La variable $http_host contient la
+      valeur du header « Host » de la requête…
+    </li>
+    <li>
+      proxy_set_header Upgrade $http_upgrade et proxy_set_header Connection «
+      Upgrade » : nécessaires si l’application utilise des websockets.
+    </li>
+  </ul>
+
+  <h2>Certificat pour https avec certbot</h2>
+  <p>
+    Certbot fourni gratuitement un certificat pour identification en https,
+    cependant il refuse de certifier une adresse sans nom de domaine auquel
+    rattacher un propriétaire. Donc l’adresse ipV4 d’une instance AWS ne permet
+    pas d’obtenir un certificat via certbot.
+  </p>
+
+  <p>
+    Le plus simple est d’avoir un nom de domaine et de créer un enregistrement
+    DNS de type CNAME reliant le sous-domaine (Note: NE PAS OUBLIER LE POINT
+    FINAL topics.ikodi.eu. par exemple) à l’adresse ip ou le site est hébergé
+    (chez AWS dans mon cas).
+  </p>
+
+  <p>Ensuite, on installe certbot pour nginx :</p>
+
+  <p>ressource:</p>
+
+  <p>
+    <a
+      href="https://www.nginx.com/blog/using-free-ssltls-certificates-from-lets-encrypt-with-nginx/"
+      >https://www.nginx.com/blog/using-free-ssltls-certificates-from-lets-encrypt-with-nginx/</a
+    >
+  </p>
+
+  <p>
+    A noter que, comme indiqué dans le lien ci-dessus, le fichier de
+    configuration du site commence par ne définir que la configuration pour le
+    port 80.
+  </p>
+
+  <p>
+    Ensuite on fait la manip pour le https, certbot fera la modification du
+    fichier de configuration du site dans nginx, et finalement on va voir ce que
+    ça donne et on fignole si nécessaire.
+  </p>
+</article>

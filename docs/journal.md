@@ -14,6 +14,7 @@ Objectifs du jour:
     - Ajout env vars pour db -> ok (commit pour deploy)
     - Mise à jour Readme avec consignes install prod -> ok
   - Il est vivant !!! -> yes ! (commit DOC)
+- Mise en forme d'un bloc 'code' pour les posts -> ok (commit)
 - Ajouter 2 ou 3 autres articles ->
 - Rédiger un article sur la création du blog avec Laravel ->
 - Faire un joli design ->

@@ -11314,6 +11314,27 @@ h4,
   padding: 1rem 0;
 }
 
+textarea.script {
+  display: block;
+  box-sizing: border-box;
+  margin: 1rem auto;
+  padding: 1rem;
+  width: 80%;
+  font-family: "Roboto Mono", monospace;
+  resize: none;
+  height: 80px;
+  border-radius: 10px;
+}
+@media screen and (max-width: 1000px) {
+  textarea.script {
+    width: 100%;
+  }
+}
+textarea.script.text {
+  background-color: var(--bs-gray-800);
+  color: var(--bs-gray-100);
+}
+
 .logoIkodi {
   width: 40px;
   height: 40px;
@@ -11344,11 +11365,12 @@ h4,
 .post__container .post-metas {
   background-color: rgba(255, 234, 143, 0.5);
   display: flex;
+  border-radius: 10px;
 }
 .post__container .post-metas li {
   font-size: small;
   list-style: none;
-  margin: 1rem;
+  margin: 0.5rem 1rem;
 }
 .post__container .post-short {
   background-color: var(--bs-gray-200);
@@ -11357,6 +11379,7 @@ h4,
   font-style: italic;
   padding: 1rem;
   margin-bottom: 2rem;
+  border-radius: 10px;
 }
 .post__list {
   display: flex;
