@@ -134,3 +134,69 @@ MESSAGE: id, auteur, contenu
   - database : Mariadb,
   - une app Laravel,
   - une app Next.js,
+
+## Install
+
+Cloner le repo, créer le dossier pour la persistance des données et le fichier .env:
+
+```bash
+git clone https://github.com/Ikodi-julien/blog.git
+cd blog
+mkdir mariadb_persistence
+chmod 0777 -R mariadb_persistence
+cd larablog
+mv .env.example .env
+```
+
+Ajouter au .env les variables d'environnement pour l'admin de l'app:
+ADMIN_EMAIL=mon@mail.fr
+ADMIN_PASSWORD=lepassword
+
+Installer les dépendences:
+
+```bash
+composer install
+npm install
+npm run production (ou development)
+```
+
+Puis éventuellement modifier le fichier docker-compose-prod.yml avec les variables d'environnement adaptées pour un fonctionnement en prod:
+
+```yaml
+mariadb:
+  ...
+  environment:
+      - MARIADB_ROOT_PASSWORD=rootpassword
+      - MARIADB_USER=blog
+      - MARIADB_DATABASE=blog
+      - MARIADB_PASSWORD=blogpassword
+      ...
+
+larablog:
+  ...
+  environment:
+      - DB_HOST=mariadb
+      - DB_PORT=3306
+      - DB_USERNAME=blog
+      - DB_DATABASE=blog
+      - DB_PASSWORD=blogpassword
+```
+
+Depuis le container larablog, avec l'utilisateur bitnami (celui de l'image non root) :
+
+```bash
+docker exec -it larablog bash
+su bitnami
+
+// Génerer un clé cryptée pour l\'app laravel depuis le container
+php artisan key:generate
+
+// Créer les tables avec données, migrations de l\'app laravel, depuis le container:
+php artisant migrate --seed
+```
+
+Enfin (hors container):
+
+```bash
+docker-compose up
+```
