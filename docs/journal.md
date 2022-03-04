@@ -1,4 +1,16 @@
-## Le 30/02/2022
+## Le 03/03/2022
+
+Objectifs du jour:
+
+- Revoir design d'un post -> ok (commit)
+- 1er deploy:
+  - DNS ->
+  - config nginx ->
+  - certbot / https ->
+  - Il est vivant !!! ->
+- Faire un joli design ->
+
+## Le 01/03/2022
 
 Objectifs du jour :
 
@@ -9,9 +21,6 @@ Objectifs du jour :
 - Revoir design navbar -> ok
 - Revoir design latest posts -> ok
   commit ->
-- Revoir design d'un post ->
-- 1er deploy ->
-- Faire un joli design ->
 
 ## Le 29/02/2022
 

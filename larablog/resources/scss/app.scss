@@ -15,6 +15,14 @@ section {
   align-items: center;
   padding: 2rem;
 }
+h1,
+h2 {
+  padding: 1.5rem 0;
+}
+h3,
+h4 {
+  padding: 1rem 0;
+}
 .logoIkodi {
   width: 40px;
   height: 40px;
@@ -32,14 +40,38 @@ section {
   max-width: 850px;
   padding: 2rem;
 }
-.post__list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  padding: 2rem;
-  width: auto;
-  max-width: 800px;
-  margin: auto;
+.post {
+  &__container {
+    margin: auto;
+    width: 100%;
+    max-width: 900px;
+    .post-metas {
+      background-color: rgba(255, 234, 143, 0.5);
+      display: flex;
+      li {
+        font-size: small;
+        list-style: none;
+        margin: 1rem;
+      }
+    }
+    .post-short {
+      background-color: var(--bs-gray-200);
+      margin: auto;
+      width: 90%;
+      font-style: italic;
+      padding: 1rem;
+      margin-bottom: 2rem;
+    }
+  }
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 2rem;
+    width: auto;
+    max-width: 800px;
+    margin: auto;
+  }
 }
 .flash-error {
   color: $red-500;
