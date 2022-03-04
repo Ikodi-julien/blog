@@ -1,3 +1,8 @@
+## Le 04/03/2022
+
+- Rédiger un article sur la création du blog avec Laravel ->
+- Finaliser le design ->
+
 ## Le 03/03/2022
 
 Objectifs du jour:
@@ -15,13 +20,11 @@ Objectifs du jour:
     - Mise à jour Readme avec consignes install prod -> ok
   - Il est vivant !!! -> yes ! (commit DOC)
 - Mise en forme d'un bloc 'code' pour les posts -> ok (commit)
-- Ajouter 2 ou 3 autres articles ->
-- Rédiger un article sur la création du blog avec Laravel ->
-- Faire un joli design ->
+- Ajouter 2 ou 3 autres articles -> ok
 
 _Issues_
 
-- Mettre en forme les articles sur un même model,
+- Mettre en forme les articles sur un même model -> ok
 - Les liens des boutons du Héro ne sont pas définis -> ok (commit)
 
 ## Le 01/03/2022
